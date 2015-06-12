@@ -26,15 +26,15 @@
      * ```js
      * {
      *   "id": 1,
-     *   "title": "Rails Rambo",
+     *   "author": "Rails Rambo",
      *
      *   "_embedded": {
      *     "comment": [{
      *       "id": 1,
-     *       "comment_title": "FIRST"
+     *       "comment_author": "FIRST"
      *     }, {
      *       "id": 2,
-     *       "comment_title": "Rails is unagi"
+     *       "comment_author": "Rails is unagi"
      *     }]
      *   }
      * }
@@ -300,7 +300,7 @@
      * ```js
      * {
      *   "id": 1,
-     *   "title": "Rails Rambo",
+     *   "author": "Rails Rambo",
      *   "comments": [1, 2]
      * }
      *
@@ -309,16 +309,16 @@
      * ```js
      * {
      *   "id": 1,
-     *   "title": "Rails Rambo",
+     *   "author": "Rails Rambo",
      *   "comments": [1, 2]
      *
      *   "_embedded": {
      *     "comment": [{
      *       "_id": 1,
-     *       "comment_title": "FIRST"
+     *       "comment_author": "FIRST"
      *     }, {
      *       "_id": 2,
-     *       "comment_title": "Rails is unagi"
+     *       "comment_author": "Rails is unagi"
      *     }]
      *   }
      * }

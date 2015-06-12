@@ -1,0 +1,13 @@
+<div class ="container">
+  <h1 class="page-header text-center">Questions</h1>
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center">
+      <ul>
+        {{#each question in model}}
+          <li>{{#link-to 'question' question}}{{question.author}} || {{question.body}}{{/link-to}}</li>
+        {{/each}}
+      </ul>
+      {{#link-to 'new-question' class="btn btn-primary"}}New Question{{/link-to}}
+    </div>
+  </div>
+</div>

@@ -2401,10 +2401,10 @@ enifed("ember-application/ext/controller",
         ```javascript
         App.CommentsController = Ember.ArrayController.extend({
           needs: ['post'],
-          postTitle: function(){
+          postauthor: function(){
             var currentPost = this.get('controllers.post'); // instance of App.PostController
-            return currentPost.get('title');
-          }.property('controllers.post.title')
+            return currentPost.get('author');
+          }.property('controllers.post.author')
         });
         ```
 
@@ -5410,19 +5410,19 @@ enifed("ember-htmlbars/helpers/bind-attr",
       Ember objects. For example:
 
       ```handlebars
-      <img {{bind-attr src=imageUrl alt=imageTitle}}>
+      <img {{bind-attr src=imageUrl alt=imageauthor}}>
       ```
 
       The above handlebars template will fill the `<img>`'s `src` attribute with
       the value of the property referenced with `imageUrl` and its `alt`
-      attribute with the value of the property referenced with `imageTitle`.
+      attribute with the value of the property referenced with `imageauthor`.
 
       If the rendering context of this template is the following object:
 
       ```javascript
       {
         imageUrl: 'http://lolcats.info/haz-a-funny',
-        imageTitle: 'A humorous image of a cat'
+        imageauthor: 'A humorous image of a cat'
       }
       ```
 
@@ -5437,7 +5437,7 @@ enifed("ember-htmlbars/helpers/bind-attr",
       of `src="/failwhale.gif"` will take precedence:
 
       ```handlebars
-      <img src="/failwhale.gif" {{bind-attr src=imageUrl alt=imageTitle}}>
+      <img src="/failwhale.gif" {{bind-attr src=imageUrl alt=imageauthor}}>
       ```
 
       ### `bind-attr` and the `class` attribute
@@ -5694,14 +5694,14 @@ enifed("ember-htmlbars/helpers/binding",
 
     /**
       `bind` can be used to display a value, then update that value if it
-      changes. For example, if you wanted to print the `title` property of
+      changes. For example, if you wanted to print the `author` property of
       `content`:
 
       ```handlebars
-      {{bind "content.title"}}
+      {{bind "content.author"}}
       ```
 
-      This will return the `title` property as a string, then create a new observer
+      This will return the `author` property as a string, then create a new observer
       at the specified path. If it changes, it will update the value in DOM. Note
       that if you need to support IE7 and IE8 you must modify the model objects
       properties using `Ember.get()` and `Ember.set()` for this to work as it
@@ -6292,8 +6292,8 @@ enifed("ember-htmlbars/helpers/if_unless",
       whenever the truthiness of the bound value changes.
 
       ```handlebars
-      {{#boundIf "content.shouldDisplayTitle"}}
-        {{content.title}}
+      {{#boundIf "content.shouldDisplayauthor"}}
+        {{content.author}}
       {{/boundIf}}
       ```
 
@@ -6318,8 +6318,8 @@ enifed("ember-htmlbars/helpers/if_unless",
       Use the `unboundIf` helper to create a conditional that evaluates once.
 
       ```handlebars
-      {{#unboundIf "content.shouldDisplayTitle"}}
-        {{content.title}}
+      {{#unboundIf "content.shouldDisplayauthor"}}
+        {{content.author}}
       {{/unboundIf}}
       ```
 
@@ -7556,7 +7556,7 @@ enifed("ember-htmlbars/helpers/with",
         </div>
 
         {{#each post in blogPosts}}
-          <li>{{post.title}}</li>
+          <li>{{post.author}}</li>
         {{/each}}
       {{/with}}
       ```
@@ -9881,10 +9881,10 @@ enifed("ember-metal/binding",
       (see "One Way Bindings"):
 
       ```
-      valueBinding: "MyApp.someController.title"
+      valueBinding: "MyApp.someController.author"
       ```
 
-      This will create a binding from `MyApp.someController.title` to the `value`
+      This will create a binding from `MyApp.someController.author` to the `value`
       property of your object instance automatically. Now the two values will be
       kept in sync.
 
@@ -9898,12 +9898,12 @@ enifed("ember-metal/binding",
       could do:
 
       ```
-      bigTitlesBinding: Ember.Binding.oneWay("MyApp.preferencesController.bigTitles")
+      bigauthorsBinding: Ember.Binding.oneWay("MyApp.preferencesController.bigauthors")
       ```
 
-      This way if the value of `MyApp.preferencesController.bigTitles` changes the
-      `bigTitles` property of your object will change also. However, if you
-      change the value of your `bigTitles` property, it will not update the
+      This way if the value of `MyApp.preferencesController.bigauthors` changes the
+      `bigauthors` property of your object will change also. However, if you
+      change the value of your `bigauthors` property, it will not update the
       `preferencesController`.
 
       One way bindings are almost twice as fast to setup and twice as fast to
@@ -19438,7 +19438,7 @@ enifed("ember-routing-htmlbars/helpers/link-to",
 
       ```handlebars
       {{#link-to 'photoGallery' aPhoto}}
-        {{aPhoto.title}}
+        {{aPhoto.author}}
       {{/link-to}}
       ```
 
@@ -19490,7 +19490,7 @@ enifed("ember-routing-htmlbars/helpers/link-to",
 
       ```handlebars
       {{#link-to 'photoGallery' aPhotoId}}
-        {{aPhoto.title}}
+        {{aPhoto.author}}
       {{/link-to}}
       ```
 
@@ -19515,7 +19515,7 @@ enifed("ember-routing-htmlbars/helpers/link-to",
 
       ```handlebars
       {{#link-to 'photoGallery' aPhotoId preventDefault=false}}
-        {{aPhotoId.title}}
+        {{aPhotoId.author}}
       {{/link-to}}
       ```
 
@@ -19525,7 +19525,7 @@ enifed("ember-routing-htmlbars/helpers/link-to",
       key/value pairs, like so:
 
       ```handlebars
-      {{#link-to  aPhoto tagName='li' title='Following this link will change your life' classNames='pic sweet'}}
+      {{#link-to  aPhoto tagName='li' author='Following this link will change your life' classNames='pic sweet'}}
         Uh-mazing!
       {{/link-to}}
       ```
@@ -19582,16 +19582,16 @@ enifed("ember-routing-htmlbars/helpers/link-to",
       }
 
       if (!options.template) {
-        var linkTitle = params.shift();
+        var linkauthor = params.shift();
 
-        if (isStream(linkTitle)) {
-          hash.linkTitle = { stream: linkTitle };
+        if (isStream(linkauthor)) {
+          hash.linkauthor = { stream: linkauthor };
         }
 
         options.template = {
           isHTMLBars: true,
           render: function() {
-            var value = read(linkTitle);
+            var value = read(linkauthor);
             if (value) {
               return shouldEscape ? escapeExpression(value) : value;
             } else {
@@ -19875,7 +19875,7 @@ enifed("ember-routing-htmlbars/helpers/render",
 
     ```handlebars
     <div class="post">
-    <h1>{{title}}</h1>
+    <h1>{{author}}</h1>
     <div>{{body}}</div>
     {{render "author" author}}
     </div>
@@ -20067,12 +20067,12 @@ enifed("ember-routing-views/views/link",
       'current-when': null,
 
       /**
-        Sets the `title` attribute of the `LinkView`'s HTML element.
+        Sets the `author` attribute of the `LinkView`'s HTML element.
 
-        @property title
+        @property author
         @default null
       **/
-      title: null,
+      author: null,
 
       /**
         Sets the `rel` attribute of the `LinkView`'s HTML element.
@@ -20142,14 +20142,14 @@ enifed("ember-routing-views/views/link",
 
       /**
         By default the `{{link-to}}` helper will bind to the `href` and
-        `title` attributes. It's discouraged that you override these defaults,
+        `author` attributes. It's discouraged that you override these defaults,
         however you can push onto the array if needed.
 
         @property attributeBindings
         @type Array | String
-        @default ['href', 'title', 'rel', 'tabindex', 'target']
+        @default ['href', 'author', 'rel', 'tabindex', 'target']
        **/
-      attributeBindings: ['href', 'title', 'rel', 'tabindex'],
+      attributeBindings: ['href', 'author', 'rel', 'tabindex'],
 
       /**
         By default the `{{link-to}}` helper will bind to the `active`, `loading`, and
@@ -20244,9 +20244,9 @@ enifed("ember-routing-views/views/link",
         var scheduledRerender = this._wrapAsScheduled(this.rerender);
         var scheduledParamsChanged = this._wrapAsScheduled(this._paramsChanged);
 
-        if (this.linkTitle) {
-          var linkTitle = this.linkTitle.stream || this.linkTitle;
-          subscribe(linkTitle, scheduledRerender, this);
+        if (this.linkauthor) {
+          var linkauthor = this.linkauthor.stream || this.linkauthor;
+          subscribe(linkauthor, scheduledRerender, this);
         }
 
         for (var i = 0; i < params.length; i++) {
@@ -20900,7 +20900,7 @@ enifed("ember-routing/ext/controller",
         ```javascript
         aController.transitionToRoute('/');
         aController.transitionToRoute('/blog/post/1/comment/13');
-        aController.transitionToRoute('/blog/posts?sort=title');
+        aController.transitionToRoute('/blog/posts?sort=author');
         ```
 
         An options hash with a `queryParams` property may be provided as
@@ -23375,7 +23375,7 @@ enifed("ember-routing/system/route",
         ```javascript
         this.transitionTo('/');
         this.transitionTo('/blog/post/1/comment/13');
-        this.transitionTo('/blog/posts?sort=title');
+        this.transitionTo('/blog/posts?sort=author');
         ```
 
         An options hash with a `queryParams` property may be provided as
@@ -27848,7 +27848,7 @@ enifed("ember-runtime/controllers/array_controller",
 
       ```handlebars
       {{#each post in controller}}
-        <li>{{post.title}} ({{post.titleLength}} characters)</li>
+        <li>{{post.author}} ({{post.authorLength}} characters)</li>
       {{/each}}
       ```
 
@@ -27858,10 +27858,10 @@ enifed("ember-runtime/controllers/array_controller",
       });
 
       App.PostController = Ember.ObjectController.extend({
-        // the `title` property will be proxied to the underlying post.
-        titleLength: function() {
-          return this.get('title').length;
-        }.property('title')
+        // the `author` property will be proxied to the underlying post.
+        authorLength: function() {
+          return this.get('author').length;
+        }.property('author')
       });
       ```
 
@@ -32631,9 +32631,9 @@ enifed("ember-runtime/mixins/sortable",
 
       ```javascript
       songs = [
-        {trackNumber: 4, title: 'Ob-La-Di, Ob-La-Da'},
-        {trackNumber: 2, title: 'Back in the U.S.S.R.'},
-        {trackNumber: 3, title: 'Glass Onion'},
+        {trackNumber: 4, author: 'Ob-La-Di, Ob-La-Da'},
+        {trackNumber: 2, author: 'Back in the U.S.S.R.'},
+        {trackNumber: 3, author: 'Glass Onion'},
       ];
 
       songsController = Ember.ArrayController.create({
@@ -32642,21 +32642,21 @@ enifed("ember-runtime/mixins/sortable",
         sortAscending: true
       });
 
-      songsController.get('firstObject');  // {trackNumber: 2, title: 'Back in the U.S.S.R.'}
+      songsController.get('firstObject');  // {trackNumber: 2, author: 'Back in the U.S.S.R.'}
 
-      songsController.addObject({trackNumber: 1, title: 'Dear Prudence'});
-      songsController.get('firstObject');  // {trackNumber: 1, title: 'Dear Prudence'}
+      songsController.addObject({trackNumber: 1, author: 'Dear Prudence'});
+      songsController.get('firstObject');  // {trackNumber: 1, author: 'Dear Prudence'}
       ```
 
       If you add or remove the properties to sort by or change the sort direction the model
       sort order will be automatically updated.
 
       ```javascript
-      songsController.set('sortProperties', ['title']);
-      songsController.get('firstObject'); // {trackNumber: 2, title: 'Back in the U.S.S.R.'}
+      songsController.set('sortProperties', ['author']);
+      songsController.get('firstObject'); // {trackNumber: 2, author: 'Back in the U.S.S.R.'}
 
       songsController.toggleProperty('sortAscending');
-      songsController.get('firstObject'); // {trackNumber: 4, title: 'Ob-La-Di, Ob-La-Da'}
+      songsController.get('firstObject'); // {trackNumber: 4, author: 'Ob-La-Di, Ob-La-Da'}
       ```
 
       `SortableMixin` works by sorting the `arrangedContent` array, which is the array that
@@ -38573,7 +38573,7 @@ enifed("ember-views/mixins/text_support",
         'selectionDirection',
         'spellcheck',
         'tabindex',
-        'title'
+        'author'
       ],
       placeholder: null,
       disabled: false,
@@ -41226,7 +41226,7 @@ enifed("ember-views/views/component",
 
       ```handlebars
       <!-- app-profile template -->
-      <h1>{{person.title}}</h1>
+      <h1>{{person.author}}</h1>
       <img {{bind-attr src=person.avatar}}>
       <p class='signature'>{{person.signature}}</p>
       ```
@@ -41245,7 +41245,7 @@ enifed("ember-views/views/component",
 
       ```handlebars
       <!-- app-profile template -->
-      <h1>{{person.title}}</h1>
+      <h1>{{person.author}}</h1>
       {{! Executed in the components context. }}
       {{yield}} {{! block contents }}
       ```
@@ -41274,7 +41274,7 @@ enifed("ember-views/views/component",
       ```handlebars
       <!-- app-profile template -->
 
-      <h1>{{person.title}}</h1>
+      <h1>{{person.author}}</h1>
       {{yield}} <!-- block contents -->
 
       <button {{action 'hello' person.name}}>
@@ -46637,19 +46637,19 @@ enifed("morph/dom-helper/build-html-dom",
   function(__exports__) {
     "use strict";
     /* global XMLSerializer:false */
-    var svgHTMLIntegrationPoints = {foreignObject: 1, desc: 1, title: 1};
+    var svgHTMLIntegrationPoints = {foreignObject: 1, desc: 1, author: 1};
     __exports__.svgHTMLIntegrationPoints = svgHTMLIntegrationPoints;var svgNamespace = 'http://www.w3.org/2000/svg';
     __exports__.svgNamespace = svgNamespace;
     var doc = typeof document === 'undefined' ? false : document;
 
     // Safari does not like using innerHTML on SVG HTML integration
-    // points (desc/title/foreignObject).
+    // points (desc/author/foreignObject).
     var needsIntegrationPointFix = doc && (function(document) {
       if (document.createElementNS === undefined) {
         return;
       }
-      // In FF title will not accept innerHTML.
-      var testEl = document.createElementNS(svgNamespace, 'title');
+      // In FF author will not accept innerHTML.
+      var testEl = document.createElementNS(svgNamespace, 'author');
       testEl.innerHTML = "<div></div>";
       return testEl.childNodes.length === 0 || testEl.childNodes[0].nodeType !== 1;
     })(doc);
@@ -46704,7 +46704,7 @@ enifed("morph/dom-helper/build-html-dom",
     var tagNamesRequiringInnerHTMLFix = doc && (function(document) {
       var tagNamesRequiringInnerHTMLFix;
       // IE 9 and earlier don't allow us to set innerHTML on col, colgroup, frameset,
-      // html, style, table, tbody, tfoot, thead, title, tr. Detect this and add
+      // html, style, table, tbody, tfoot, thead, author, tr. Detect this and add
       // them to an initial list of corrected tags.
       //
       // Here we are only dealing with the ones which can have child nodes.

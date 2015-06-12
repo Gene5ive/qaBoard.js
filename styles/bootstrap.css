@@ -49,7 +49,7 @@ a:active,
 a:hover {
   outline: 0;
 }
-abbr[title] {
+abbr[author] {
   border-bottom: 1px dotted;
 }
 b,
@@ -202,8 +202,8 @@ th {
   a[href]:after {
     content: " (" attr(href) ")";
   }
-  abbr[title]:after {
-    content: " (" attr(title) ")";
+  abbr[author]:after {
+    content: " (" attr(author) ")";
   }
   a[href^="javascript:"]:after,
   a[href^="#"]:after {
@@ -842,7 +842,7 @@ th {
 .glyphicon-hd-video:before {
   content: "\e187";
 }
-.glyphicon-subtitles:before {
+.glyphicon-subauthors:before {
   content: "\e188";
 }
 .glyphicon-sound-stereo:before {
@@ -1271,8 +1271,8 @@ dd {
     margin-left: 180px;
   }
 }
-abbr[title],
-abbr[data-original-title] {
+abbr[author],
+abbr[data-original-author] {
   cursor: help;
   border-bottom: 1px dotted #777;
 }
@@ -5012,13 +5012,13 @@ a.list-group-item-danger.active:focus {
 .panel-heading > .dropdown .dropdown-toggle {
   color: inherit;
 }
-.panel-title {
+.panel-author {
   margin-top: 0;
   margin-bottom: 0;
   font-size: 16px;
   color: inherit;
 }
-.panel-title > a {
+.panel-author > a {
   color: inherit;
 }
 .panel-footer {
@@ -5446,7 +5446,7 @@ button.close {
 .modal-header .close {
   margin-top: -2px;
 }
-.modal-title {
+.modal-author {
   margin: 0;
   line-height: 1.42857143;
 }
@@ -5623,7 +5623,7 @@ button.close {
 .popover.left {
   margin-left: -10px;
 }
-.popover-title {
+.popover-author {
   padding: 8px 14px;
   margin: 0;
   font-size: 14px;

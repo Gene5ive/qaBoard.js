@@ -755,7 +755,7 @@ define("htmlbars-compiler/fragment-javascript-compiler",
 
     var svgNamespace = "http://www.w3.org/2000/svg",
     // http://www.w3.org/html/wg/drafts/html/master/syntax.html#html-integration-point
-        svgHTMLIntegrationPoints = {'foreignObject':true, 'desc':true, 'title':true};
+        svgHTMLIntegrationPoints = {'foreignObject':true, 'desc':true, 'author':true};
 
 
     function FragmentJavaScriptCompiler() {

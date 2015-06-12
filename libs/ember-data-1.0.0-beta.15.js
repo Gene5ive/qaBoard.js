@@ -1037,7 +1037,7 @@
         ```js
         {
           "id": 1,
-          "title": "Rails is omakase",
+          "author": "Rails is omakase",
           "comments": [ 1, 2, 3 ]
         }
         ```
@@ -1077,7 +1077,7 @@
         {
           "post": {
             "id": 1,
-            "title": "Rails is omakase",
+            "author": "Rails is omakase",
             "links": { "comments": "/posts/1/comments" }
           }
         }
@@ -2536,8 +2536,8 @@
         var mappedKey;
         if (attrs && attrs[key]) {
           mappedKey = attrs[key];
-          //We need to account for both the {title: 'post_title'} and
-          //{title: {key: 'post_title'}} forms
+          //We need to account for both the {author: 'post_author'} and
+          //{author: {key: 'post_author'}} forms
           if (mappedKey.key) {
             mappedKey = mappedKey.key;
           }
@@ -2576,7 +2576,7 @@
 
         ```javascript
         App.Comment = DS.Model.extend({
-          title: DS.attr(),
+          author: DS.attr(),
           body: DS.attr(),
 
           author: DS.belongsTo('user')
@@ -2587,7 +2587,7 @@
 
         ```javascript
         {
-          "title": "Rails is unagi",
+          "author": "Rails is unagi",
           "body": "Rails? Omakase? O_O",
           "author": 12
         }
@@ -2622,7 +2622,7 @@
         App.PostSerializer = DS.JSONSerializer.extend({
           serialize: function(snapshot, options) {
             var json = {
-              POST_TTL: snapshot.attr('title'),
+              POST_TTL: snapshot.attr('author'),
               POST_BDY: snapshot.attr('body'),
               POST_CMS: snapshot.hasMany('comments', { ids: true })
             }
@@ -2678,7 +2678,7 @@
 
         ```javascript
         {
-          "TITLE": "Rails is omakase",
+          "author": "Rails is omakase",
           "BODY": "Yep. Omakase.",
           "COMMENT_IDS": [ 1, 2, 3 ]
         }
@@ -2695,8 +2695,8 @@
           serialize: function(snapshot, options) {
             var json = this._super.apply(this, arguments);
 
-            json.subject = json.title;
-            delete json.title;
+            json.subject = json.author;
+            delete json.author;
 
             return json;
           }
@@ -3393,7 +3393,7 @@
         {
           "post": {
             "id": 1,
-            "title": "Rails is omakase",
+            "author": "Rails is omakase",
             "comments": [ 1, 2 ]
           },
           "comments": [{
@@ -3446,7 +3446,7 @@
         {
           "post": {
             "id": 1,
-            "title": "Rails is omakase",
+            "author": "Rails is omakase",
             "comments": [ 1, 2 ]
           },
           "comments": [{
@@ -3461,7 +3461,7 @@
 
         The `normalize` method will be called three times:
 
-        * With `App.Post`, `"posts"` and `{ id: 1, title: "Rails is omakase", ... }`
+        * With `App.Post`, `"posts"` and `{ id: 1, author: "Rails is omakase", ... }`
         * With `App.Comment`, `"comments"` and `{ id: 1, body: "FIRST" }`
         * With `App.Comment`, `"comments"` and `{ id: 2, body: "Rails is unagi" }`
 
@@ -3527,15 +3527,15 @@
         ```js
         {
           "id": 1,
-          "title": "Rails is omakase",
+          "author": "Rails is omakase",
 
           "_embedded": {
             "comment": [{
               "_id": 1,
-              "comment_title": "FIRST"
+              "comment_author": "FIRST"
             }, {
               "_id": 2,
-              "comment_title": "Rails is unagi"
+              "comment_author": "Rails is unagi"
             }]
           }
         }
@@ -3560,9 +3560,9 @@
             // are now located under `comments`
             comments: function(hash) {
               hash.id = hash._id;
-              hash.title = hash.comment_title;
+              hash.author = hash.comment_author;
               delete hash._id;
-              delete hash.comment_title;
+              delete hash.comment_author;
               return hash;
             }
           }
@@ -3659,18 +3659,18 @@
           "_embedded": {
             "post": [{
               "id": 1,
-              "title": "Rails is omakase"
+              "author": "Rails is omakase"
             }, {
               "id": 2,
-              "title": "The Parley Letter"
+              "author": "The Parley Letter"
             }],
             "comment": [{
               "_id": 1,
-              "comment_title": "Rails is unagi"
+              "comment_author": "Rails is unagi"
               "post_id": 1
             }, {
               "_id": 2,
-              "comment_title": "Don't tread on me",
+              "comment_author": "Don't tread on me",
               "post_id": 2
             }]
           }
@@ -3710,9 +3710,9 @@
             // are now located under `comments`
             comments: function(hash) {
               hash.id = hash._id;
-              hash.title = hash.comment_title;
+              hash.author = hash.comment_author;
               delete hash._id;
-              delete hash.comment_title;
+              delete hash.comment_author;
               return hash;
             }
           }
@@ -3787,7 +3787,7 @@
         {
           "posts": [{
             "id": "1",
-            "title": "Rails is omakase",
+            "author": "Rails is omakase",
             "author", "1",
             "comments": [ "1" ]
           }],
@@ -3891,7 +3891,7 @@
 
         ```js
         App.Comment = DS.Model.extend({
-          title: DS.attr(),
+          author: DS.attr(),
           body: DS.attr(),
 
           author: DS.belongsTo('user')
@@ -3902,7 +3902,7 @@
 
         ```js
         {
-          "title": "Rails is unagi",
+          "author": "Rails is unagi",
           "body": "Rails? Omakase? O_O",
           "author": 12
         }
@@ -3937,7 +3937,7 @@
         App.PostSerializer = DS.RESTSerializer.extend({
           serialize: function(snapshot, options) {
             var json = {
-              POST_TTL: snapshot.attr('title'),
+              POST_TTL: snapshot.attr('author'),
               POST_BDY: snapshot.attr('body'),
               POST_CMS: snapshot.hasMany('comments', { ids: true })
             }
@@ -3993,7 +3993,7 @@
 
         ```js
         {
-          "TITLE": "Rails is omakase",
+          "author": "Rails is omakase",
           "BODY": "Yep. Omakase.",
           "COMMENT_IDS": [ 1, 2, 3 ]
         }
@@ -4010,8 +4010,8 @@
           serialize: function(snapshot, options) {
             var json = this._super(snapshot, options);
 
-            json.subject = json.title;
-            delete json.title;
+            json.subject = json.author;
+            delete json.author;
 
             return json;
           }
@@ -4265,7 +4265,7 @@
         {
           "post": {
             "id": 1,
-            "title": "Rails is omakase",
+            "author": "Rails is omakase",
             "links": { "flagged_comments": "api/comments/flagged" }
           }
         }
@@ -4277,7 +4277,7 @@
         {
           "post": {
             "id": 1,
-            "title": "Rails is omakase",
+            "author": "Rails is omakase",
             "links": { "flaggedComments": "api/comments/flagged" }
           }
         }
@@ -7050,7 +7050,7 @@
         Example
 
         ```javascript
-        var post = store.push('post', { id: 1, author: 'Tomster', title: 'Ember.js rocks' });
+        var post = store.push('post', { id: 1, author: 'Tomster', author: 'Ember.js rocks' });
         var snapshot = post._createSnapshot();
 
         snapshot.id; // => '1'
@@ -7098,11 +7098,11 @@
         Example
 
         ```javascript
-        var post = store.createRecord('post', { author: 'Tomster', title: 'Ember.js rocks' });
+        var post = store.createRecord('post', { author: 'Tomster', author: 'Ember.js rocks' });
         var snapshot = post._createSnapshot();
 
         snapshot.attr('author'); // => 'Tomster'
-        snapshot.attr('title'); // => 'Ember.js rocks'
+        snapshot.attr('author'); // => 'Ember.js rocks'
         ```
 
         Note: Values are loaded eagerly and cached when the snapshot is created.
@@ -7124,10 +7124,10 @@
         Example
 
         ```javascript
-        var post = store.createRecord('post', { author: 'Tomster', title: 'Ember.js rocks' });
+        var post = store.createRecord('post', { author: 'Tomster', author: 'Ember.js rocks' });
         var snapshot = post._createSnapshot();
 
-        snapshot.attributes(); // => { author: 'Tomster', title: 'Ember.js rocks' }
+        snapshot.attributes(); // => { author: 'Tomster', author: 'Ember.js rocks' }
         ```
 
         @method attributes
@@ -7149,7 +7149,7 @@
         Example
 
         ```javascript
-        var post = store.push('post', { id: 1, title: 'Hello World' });
+        var post = store.push('post', { id: 1, author: 'Hello World' });
         var comment = store.createRecord('comment', { body: 'Lorem ipsum', post: post });
         var snapshot = comment._createSnapshot();
 
@@ -7214,7 +7214,7 @@
         Example
 
         ```javascript
-        var post = store.createRecord('post', { title: 'Hello World', comments: [2, 3] });
+        var post = store.createRecord('post', { author: 'Hello World', comments: [2, 3] });
         var snapshot = post._createSnapshot();
 
         snapshot.hasMany('comments'); // => [DS.Snapshot, DS.Snapshot]
@@ -8277,11 +8277,11 @@
         Example
 
         ```javascript
-        record.get('name'); // 'Untitled Document'
+        record.get('name'); // 'Unauthord Document'
         record.set('name', 'Doc 1');
         record.get('name'); // 'Doc 1'
         record.rollback();
-        record.get('name'); // 'Untitled Document'
+        record.get('name'); // 'Unauthord Document'
         ```
 
         @method rollback
@@ -9051,7 +9051,7 @@
 
         ```js
         store.createRecord('post', {
-          title: "Rails is omakase"
+          author: "Rails is omakase"
         });
         ```
 
@@ -9120,7 +9120,7 @@
 
         ```javascript
         var post = store.createRecord('post', {
-          title: "Rails is omakase"
+          author: "Rails is omakase"
         });
 
         store.deleteRecord(post);
@@ -10293,7 +10293,7 @@
 
         var pushData = {
           posts: [
-            {id: 1, post_title: "Great post", comment_ids: [2]}
+            {id: 1, post_author: "Great post", comment_ids: [2]}
           ],
           comments: [
             {id: 2, comment_body: "Insightful comment"}
@@ -11516,7 +11516,7 @@
         {
           "post": {
             "id": "1"
-            "title": "Rails is omakase",
+            "author": "Rails is omakase",
             "comments": [{
               "id": "1",
               "body": "Rails is unagi"
@@ -11553,7 +11553,7 @@
 
         ```js
         Post = DS.Model.extend({
-          title:    DS.attr('string'),
+          author:    DS.attr('string'),
           body:     DS.attr('string'),
           author:   DS.belongsTo('author')
         });
@@ -11581,7 +11581,7 @@
         {
           "post": {
             "id": "1"
-            "title": "Rails is omakase",
+            "author": "Rails is omakase",
             "author": {
               "id": "2"
               "name": "dhh"
@@ -11630,7 +11630,7 @@
 
         ```js
         Post = DS.Model.extend({
-          title:    DS.attr('string'),
+          author:    DS.attr('string'),
           body:     DS.attr('string'),
           comments: DS.hasMany('comment')
         });
@@ -11658,7 +11658,7 @@
         {
           "post": {
             "id": "1"
-            "title": "Rails is omakase",
+            "author": "Rails is omakase",
             "body": "I want this for my ORM, I want that for my template language..."
             "comments": [{
               "id": "1",
@@ -11692,7 +11692,7 @@
         {
           "post": {
             "id": "1"
-            "title": "Rails is omakase",
+            "author": "Rails is omakase",
             "body": "I want this for my ORM, I want that for my template language..."
             "comments": ["1", "2"]
           }
@@ -12622,7 +12622,7 @@
 
           posts: DS.hasMany('post'),
 
-          title: DS.attr('string')
+          author: DS.attr('string')
         });
 
         var fields = Ember.get(App.Blog, 'fields');
@@ -12634,7 +12634,7 @@
         // users, hasMany
         // owner, belongsTo
         // posts, hasMany
-        // title, attribute
+        // author, attribute
         ```
 
         @property fields

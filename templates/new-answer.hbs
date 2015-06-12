@@ -1,0 +1,10 @@
+<h2>New answer</h2>
+
+<form>
+  <div class="form-group">
+    <label for="text">Your Answer:</label>
+    {{textarea value=text id="text" class="form-control" rows="5"}}
+  </div>
+
+  <button class="btn btn-primary" {{action "save"}}>Add your answer</button>
+</form>
