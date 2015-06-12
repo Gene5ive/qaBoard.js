@@ -1,34 +1,52 @@
-<h1>{{author}}</h1>
-
-{{#if isEditing}}
-  <form>
-    <div class="form-group">
-      <label for="author">author</label>
-      {{input value=author id="author" class="form-control"}}
+<div class ="container">
+  <h1 class="page-header text-center">{{author}}</h1>
+  <div id="row">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      {{#if isEditing}}
+        <form>
+          <div class="form-group">
+            <label for="author">Author</label>
+            {{input value=author id="author" class="form-control"}}
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            {{input value=description id="description" class="form-control"}}
+          </div>
+          <div class="form-group">
+            <label for="question">Question</label>
+            {{textarea value=question id="question" class="form-control" rows="15"}}
+          </div>
+          <button class="btn btn-primary" {{action 'save'}}>Save</button>
+        </form>
+      {{else}}
+      <ul>
+        <li>{{description}}</li>
+        <li>{{question}}</li>
+      </ul>
+        <button class="btn btn-primary" {{action 'edit'}}>Edit</button>
+      {{/if}}
     </div>
-
-    <div class="form-group">
-      <label for="body">Question</label>
-      {{textarea value=body id="body" class="form-control" rows="15"}}
+  </div>
+</div>
+<br>
+<div class="text-center">
+  {{#link-to 'new-question' class="btn btn-primary"}}New Question{{/link-to}}
+</div>
+<div class ="container">
+  <h1 class="page-header text-center">Answers:</h1>
+  <div id="row">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      {{#each answer in answers itemController="answer"}}
+        <p>
+          {{answer.text}}
+          <button class="btn btn-xs btn-danger" {{action 'delete'}}>Delete</button>
+        </p>
+      {{/each}}
     </div>
-
-    <button class="btn btn-primary" {{action 'save'}}>Save</button>
-  </form>
-{{else}}
-  <p>{{body}}</p>
-
-  <button class="btn btn-primary" {{action 'edit'}}>Edit</button>
-{{/if}}
+  </div>
+</div>
+<div class="text-center">
+  <p>{{#link-to 'new-answer' this class="btn btn-success"}}New Answer{{/link-to}}</p>
+</div>
 
 {{outlet}}
-
-<h2>Answers</h2>
-
-{{#each answer in answers itemController="answer"}}
-  <p>
-    {{answer.text}}
-    <button class="btn btn-xs btn-danger" {{action 'delete'}}>delete</button>
-  </p>
-{{/each}}
-
-<p>{{#link-to 'new-answer' this class="btn btn-success"}}New answer{{/link-to}}</p>
